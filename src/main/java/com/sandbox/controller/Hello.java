@@ -23,7 +23,7 @@ public class Hello {
     public Map<String, Object> sayHi(){
         logger.debug("logger test in hello.class");
         Map<String, Object> result = new HashMap<>();
-        result.put("a", 1);
+        result.put("a", 11);
         result.put("b", "hello");
         return result;
     }
