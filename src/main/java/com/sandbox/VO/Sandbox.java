@@ -1,16 +1,15 @@
 package com.sandbox.VO;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * Created by mike on 2017/2/21.
  */
-public class Sandbox implements Serializable {
+public class Sandbox<T> implements Serializable {
 
     private String msg;
     private Long status;
-    private Map<String, Object> result;
+    private T result;
 
     public String getMsg() {
         return msg;
@@ -28,11 +27,11 @@ public class Sandbox implements Serializable {
         this.status = status;
     }
 
-    public Map<String, Object> getResult() {
+    public T getResult() {
         return result;
     }
 
-    public void setResult(Map<String, Object> result) {
+    public void setResult(T result) {
         this.result = result;
     }
 }
