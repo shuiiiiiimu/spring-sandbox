@@ -1,11 +1,7 @@
 package com.sandbox.domain;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by mike on 2017/2/21.
@@ -14,7 +10,7 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -26,6 +22,9 @@ public class User {
 
     @Column(name = "mobile")
     private String mobile;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private Set<Article> articles;
 
     public Long getId() {
         return id;
@@ -59,13 +58,28 @@ public class User {
         this.mobile = mobile;
     }
 
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
+    }
+
     @Override
     public String toString() {
+        String articles = "";
+        if (null != articles) {
+            for (Article article : this.articles) {
+                articles += String.format("Article{id=%d, title=%s}, ", article.getId(), article.getTitle());
+            }
+        }
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
+                ", articles=" + articles +
                 '}';
     }
 }

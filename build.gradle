@@ -35,8 +35,9 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-jdbc")
 	compile("org.springframework.boot:spring-boot-devtools")
     compile("com.alibaba:fastjson")
+    compile("com.squareup.retrofit2:retrofit")
 
-	runtime("mysql:mysql-connector-java")
+    runtime("mysql:mysql-connector-java")
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

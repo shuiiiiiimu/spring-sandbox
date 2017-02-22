@@ -1,12 +1,9 @@
 package com.sandbox.controller;
 
+import com.sandbox.VO.ArticleVO;
 import com.sandbox.VO.Sandbox;
-import com.sandbox.VO.UserVO;
 import com.sandbox.service.ArticleService;
-import com.sandbox.service.UserService;
 import com.sandbox.utils.ResponseUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,30 +17,23 @@ import java.util.List;
  * Created by mike on 2017/2/21.
  */
 @Controller
-@RequestMapping("/users")
-public class UserController {
-    private static final Logger logger =  LoggerFactory.getLogger(UserController.class);
-
-    @Autowired
-    private UserService userService;
+@RequestMapping("/articles")
+public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
     @RequestMapping(name = "/", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
     @ResponseBody
     public Sandbox listAll(ModelMap modelMap){
-//        userService.saveMany();
-//        articleService.saveMany();
-        List<UserVO> users = userService.findAll();
+        List<ArticleVO> articleVOs = articleService.findAll();
         Sandbox sandbox = new Sandbox();
         sandbox.setMsg(ResponseUtils.SUCCESS_MSG);
         sandbox.setStatus(ResponseUtils.SUCCESS_CODE);
-        modelMap.put("data", users);
-        modelMap.put("total", users.size());
+        modelMap.put("data", articleVOs);
+        modelMap.put("total", articleVOs.size());
         modelMap.put("meta", "meta content 元数据");
         sandbox.setResult(modelMap);
-        logger.debug("list users DONE!");
         return sandbox;
     }
-
+    
 }
