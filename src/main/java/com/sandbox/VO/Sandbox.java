@@ -1,5 +1,7 @@
 package com.sandbox.VO;
 
+import com.sandbox.utils.ResponseUtils;
+
 import java.io.Serializable;
 
 /**
@@ -7,8 +9,8 @@ import java.io.Serializable;
  */
 public class Sandbox<T> implements Serializable {
 
-    private String msg;
-    private Long status;
+    private String msg = ResponseUtils.SUCCESS_MSG;
+    private Long status = ResponseUtils.SUCCESS_CODE;
     private T result;
 
     public String getMsg() {
