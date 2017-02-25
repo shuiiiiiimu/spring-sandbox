@@ -1,5 +1,6 @@
 package com.sandbox.controller;
 
+import com.google.gson.Gson;
 import com.sandbox.VO.Sandbox;
 import com.sandbox.utils.ResponseUtils;
 import java.lang.String;
@@ -21,7 +22,7 @@ public class ErrorController {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public Sandbox showServer404(HttpServletRequest request) {
         Sandbox sandbox = new Sandbox();
-        sandbox.setMsg(String.format(ResponseUtils.NOT_FOUND_MSG, request.getRequestURL()));
+        sandbox.setMsg(String.format(ResponseUtils.NOT_FOUND_MSG, request.getAttribute("javax.servlet.forward.request_uri")));
         sandbox.setStatus(ResponseUtils.NOT_FOUND_CODE);
         return sandbox;
     }
@@ -41,7 +42,7 @@ public class ErrorController {
     @ResponseStatus(value = HttpStatus.GATEWAY_TIMEOUT)
     public Sandbox showServer502(HttpServletRequest request) {
         Sandbox sandbox = new Sandbox();
-        sandbox.setMsg(String.format(ResponseUtils.TIMEOUT_MSG, request.getRequestURL()));
+        sandbox.setMsg(String.format(ResponseUtils.TIMEOUT_MSG, request.getAttribute("javax.servlet.forward.request_uri")));
         sandbox.setStatus(ResponseUtils.TIMEOUT_CODE);
         return sandbox;
     }

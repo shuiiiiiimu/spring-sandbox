@@ -7,6 +7,7 @@ public class ResponseUtils {
 
     private ResponseUtils(){}
 
+    // Long - 定义业务码     String - 定义业务码备注
     public static final Long SUCCESS_CODE = 200L;
     public static final String SUCCESS_MSG = "OK";
 

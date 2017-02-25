@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -26,9 +25,9 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/hello")
-public class Hello {
+public class HelloController {
 
-    private static final Logger logger =  LoggerFactory.getLogger(Hello.class);
+    private static final Logger logger =  LoggerFactory.getLogger(HelloController.class);
 
     @Value("${hello.name}")
     private String name;
@@ -54,7 +53,7 @@ public class Hello {
         return String.format("hello, %s", name);
     }
 
-    @RequestMapping("/retrofit2")
+    @RequestMapping("/r2")
     public Sandbox fetch() throws Exception {
         Sandbox sandbox = new Sandbox();
         sandbox.setMsg("Retrofit.test");
