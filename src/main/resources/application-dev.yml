@@ -11,3 +11,11 @@ spring:
     database: MYSQL
     hibernate:
       ddl-auto: update #create-drop
+rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+  virtual-host: /
+  app:
+    routing_key: sandbox

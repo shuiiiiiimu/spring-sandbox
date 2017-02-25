@@ -8,6 +8,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,9 @@ public class HelloController {
     @Value("${hello.name}")
     private String name;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
     @RequestMapping("/")
     @ResponseBody
     public Map<String, Object> sayHi() throws Exception{
@@ -46,6 +51,15 @@ public class HelloController {
     @ResponseBody
     public String testError() throws Exception{
         throw new Exception("发生错误.");
+    }
+
+    @RequestMapping("/push")
+    @ResponseBody
+    public String pushMQ() throws Exception{
+        // TODO queue will be configurable
+        rabbitTemplate.convertAndSend("queue.sandbox", "Hello from RabbitMQ!");
+        logger.debug("pushed message to MQ.");
+        return "DONE!";
     }
 
     @RequestMapping("/iv")
