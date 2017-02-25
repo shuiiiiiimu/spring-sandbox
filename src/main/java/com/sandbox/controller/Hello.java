@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by mike on 2017/2/19.
  */
 @RestController
-@RequestMapping("/hello")
+@RequestMapping("/")
 public class Hello {
 
     private static final Logger logger =  LoggerFactory.getLogger(Hello.class);
@@ -29,7 +29,7 @@ public class Hello {
     @Value("${hello.name}")
     private String name;
 
-    @RequestMapping("/")
+    @RequestMapping("/hello")
     @ResponseBody
     public Map<String, Object> sayHi(){
         logger.debug("logger test in hello.class");
@@ -44,7 +44,7 @@ public class Hello {
         return String.format("hello, %s", name);
     }
 
-    @RequestMapping("/git")
+    @RequestMapping("/retrofit2")
     public String fetchGitUsers() {
         String result = "Retrofit.test";
 
@@ -67,6 +67,7 @@ public class Hello {
             @Override
             public void onFailure(Call<okhttp3.ResponseBody> call, Throwable t) {}
         });
+
         return result;
     }
 
