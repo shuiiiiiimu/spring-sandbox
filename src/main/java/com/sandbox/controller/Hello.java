@@ -1,6 +1,8 @@
 package com.sandbox.controller;
 
+import com.sandbox.VO.PullwaveVO;
 import com.sandbox.service.PullWaveService;
+import com.sandbox.utils.PullwaveConverter;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.slf4j.Logger;
@@ -54,18 +56,21 @@ public class Hello {
         okhttpClient = okhttpClient.newBuilder().addInterceptor(logging).build();
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okhttpClient)
+                .addConverterFactory(new PullwaveConverter())
                 .baseUrl("http://pullwave.com/")
                 .build();
         PullWaveService pullWaveService = retrofit.create(PullWaveService.class);
-        Call<okhttp3.ResponseBody> call = pullWaveService.wave("CEO");
-        call.enqueue(new Callback<okhttp3.ResponseBody>() {
+        Call<PullwaveVO> call = pullWaveService.wave("CEO");
+        call.enqueue(new Callback<PullwaveVO>() {
             @Override
-            public void onResponse(Call<okhttp3.ResponseBody> call, Response<okhttp3.ResponseBody> response) {
+            public void onResponse(Call<PullwaveVO> call, Response<PullwaveVO> response) {
                 logger.debug(String.format("Retrofit Response => %s", response));
-                logger.info(String.format("Body => %s", response.body()));
+                logger.info(String.format("Body => %s", response.body().toString()));
             }
             @Override
-            public void onFailure(Call<okhttp3.ResponseBody> call, Throwable t) {}
+            public void onFailure(Call<PullwaveVO> call, Throwable t) {
+                logger.error("Pullwave failure.");
+            }
         });
 
         return result;
