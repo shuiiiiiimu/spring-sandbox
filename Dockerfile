@@ -1,6 +1,7 @@
 FROM frekele/gradle:3.3-jdk8
 MAINTAINER shuimu <shuimu625@gmail.com>
 
+#ADD ./build/libs/spring-sandbox.jar /app/build/libs/
 ADD build.gradle /app/
 WORKDIR /app
 

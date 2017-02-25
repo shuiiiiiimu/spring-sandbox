@@ -1,0 +1,17 @@
+rabbitmq:
+  image: rabbitmq:management
+
+mysql:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=sandbox
+
+spring-sandbox:
+  build: ./
+#  image: spring-sandbox
+  ports:
+    - "8080:8080"
+  links:
+    - mysql:mysql_server
+    - rabbitmq:mq_server
