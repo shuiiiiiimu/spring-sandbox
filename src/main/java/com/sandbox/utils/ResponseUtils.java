@@ -14,5 +14,8 @@ public class ResponseUtils {
     public static final String ERROR_MSG = "发生未知错误";
 
     public static final Long NOT_FOUND_CODE = 404L;
-    public static final String NOT_FOUND_MSG = "不存在当前地址";
+    public static final String NOT_FOUND_MSG = "不存在地址 %s";
+
+    public static final Long TIMEOUT_CODE = 502L;
+    public static final String TIMEOUT_MSG = "请求 %s 时间超时，稍后再试";
 }
